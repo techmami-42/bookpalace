@@ -104,3 +104,10 @@ body.cover-page {
 .cover-author {
   font-weight: bold;
 }
+
+.cover-logo {
+  width: 40%;
+  max-width: 300px;
+  display: block;
+  margin: 0 auto 2rem auto;
+}

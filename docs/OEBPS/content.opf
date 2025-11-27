@@ -25,6 +25,9 @@
           media-type="application/xhtml+xml"/>
     <item id="geometrie" href="text/02-geometrie-des-lesens.xhtml"
           media-type="application/xhtml+xml"/>
+          
+      <!-- Bilder -->
+      <item id="logo" href="images/logo.svg" media-type="image/svg+xml"/>
   </manifest>
 
   <spine>
