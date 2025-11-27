@@ -1,0 +1,59 @@
+/* Basis-Stile für Der Palast der Bücher */
+
+html, body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: serif;
+    line-height: 1.6;
+    font-size: 1rem;
+    padding: 1.5rem;
+    max-width: 40rem;
+    margin: 0 auto;
+  }
+  
+  h1, h2, h3 {
+    font-weight: 600;
+    margin: 1.5rem 0 0.75rem;
+  }
+  
+/* =============================
+   CODEBLOCKS – "Pergament Style"
+   ============================= */
+
+   pre {
+    background: #f3e7c8;            /* Warmes Pergament-Beige */
+    padding: 1rem;
+    border-radius: 6px;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    border: 1px solid #e2d3af;      /* dezente Kante */
+  }
+  
+  code {
+    font-family: "Courier New", monospace;
+    color: #4a3b2d;                 /* dunkles Sepia für Text */
+    font-size: 0.93rem;
+  }
+  
+  /* Optional: Farbige Hervorhebungen */
+  code .tag {
+    color: #8b5e2b;                 /* warmes Braun */
+    font-weight: 600;
+  }
+  
+  code .kw {
+    color: #5e3a1a;                 /* dunklere Tinte */
+    font-weight: 600;
+  }
+  
+  code .attr {
+    color: #7a552b;                 /* sanftes Braun für Attribute */
+  }
+  
+  code .val {
+    color: #9c6d3a;                 /* goldbraun für Werte */
+  }
+   

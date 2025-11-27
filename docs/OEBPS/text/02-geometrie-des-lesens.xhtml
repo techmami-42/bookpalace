@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <title>Die Geometrie des Lesens</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+  </head>
+    <body>
+        <section>
+          <h1>Die Geometrie des Lesens</h1>
+          <p>
+            Ein EPUB ist kein monolithisches Dokument, sondern ein geordneter Raum:
+            ein Bündel aus Dateien, Verzeichnissen und Referenzen, das in einem
+            Container zusammengehalten wird. Diese Struktur bildet die Geometrie
+            des Lesens – sie legt fest, wie Texte gefunden, sortiert und in
+            Reihenfolge gebracht werden.
+          </p>
+        </section>
+    
+        <section>
+          <h2>EPUB als Container</h2>
+          <p>
+            Technisch gesehen ist ein EPUB eine ZIP-Datei mit einer klar
+            definierten inneren Ordnung. Am Anfang steht eine unscheinbare,
+            aber zentrale Datei: <code>mimetype</code>. Sie teilt der Welt mit,
+            dass es sich bei diesem Archiv um ein EPUB handelt.
+          </p>
+    
+          <pre><code>mimetype
+    META-INF/
+      container.xml
+    OEBPS/
+      content.opf
+      nav.xhtml
+      css/
+        style.css
+      text/
+        00-cover.xhtml
+        01-vision.xhtml
+        02-geometrie-des-lesens.xhtml
+    </code></pre>
+    
+          <p>
+            Diese Struktur ist mehr als ein Verzeichnisbaum. Sie definiert, wo
+            Metadaten liegen, wie der Inhalt beschrieben wird und in welcher
+            Reihenfolge die Kapitel erscheinen.
+          </p>
+        </section>
+    
+        <section>
+          <h2>Die Datei <code>mimetype</code></h2>
+          <p>
+            Die Datei <code>mimetype</code> befindet sich im Wurzelverzeichnis
+            des EPUB-Containers. Sie enthält genau eine Zeile ohne Zeilenumbruch:
+          </p>
+    
+          <pre><code>application/epub+zip</code></pre>
+    
+          <p>
+            Diese Angabe ermöglicht es Programmen, den Container als EPUB zu
+            erkennen. Sie ist klein, aber für die Identität des Buches von
+            grundlegender Bedeutung.
+          </p>
+        </section>
+    
+        <section>
+          <h2><code>META-INF/container.xml</code></h2>
+          <p>
+            Im Verzeichnis <code>META-INF</code> liegt die Datei
+            <code>container.xml</code>. Sie verweist auf den eigentlichen
+            &bdquo;Bauplan&ldquo; des Buches, die <code>content.opf</code>.
+          </p>
+    
+          <pre><code>&lt;<span class="tag">container</span> version=<span class="val">"1.0"</span>
+      xmlns=<span class="val">"urn:oasis:names:tc:opendocument:xmlns:container"</span>&gt;
+      &lt;<span class="tag">rootfiles</span>&gt;
+        &lt;<span class="tag">rootfile</span> full-path=<span class="val">"OEBPS/content.opf"</span>
+          media-type=<span class="val">"application/oebps-package+xml"</span>/&gt;
+      &lt;/<span class="tag">rootfiles</span>&gt;
+    &lt;/<span class="tag">container</span>&gt;
+    </code></pre>
+    
+          <p>
+            Der Container beschreibt also, wo sich die zentrale
+            Paketbeschreibung befindet. Ohne diesen Verweis gäbe es keinen
+            Einstiegspunkt in die innere Ordnung des Buches.
+          </p>
+        </section>
+    
+        <section>
+          <h2><code>OEBPS/content.opf</code> &ndash; das Herz des Buches</h2>
+          <p>
+            Die Datei <code>content.opf</code> enthält Metadaten, eine Liste
+            aller relevanten Dateien und die Lesereihenfolge. Sie ist das
+            strukturelle Zentrum des EPUBs.
+          </p>
+    
+          <pre><code>&lt;<span class="tag">package</span> version=<span class="val">"3.0"</span>
+             xmlns=<span class="val">"http://www.idpf.org/2007/opf"</span>
+             unique-identifier=<span class="val">"bookid"</span>&gt;
+    
+      &lt;<span class="tag">metadata</span> xmlns:dc=<span class="val">"http://purl.org/dc/elements/1.1/"</span>&gt;
+        &lt;<span class="tag">dc:identifier</span> id=<span class="val">"bookid"</span>&gt;urn:uuid:...&lt;/<span class="tag">dc:identifier</span>&gt;
+        &lt;<span class="tag">dc:title</span>&gt;Der Palast der Bücher&lt;/<span class="tag">dc:title</span>&gt;
+        &lt;<span class="tag">dc:language</span>&gt;de&lt;/<span class="tag">dc:language</span>&gt;
+      &lt;/<span class="tag">metadata</span>&gt;
+    
+      &lt;<span class="tag">manifest</span>&gt;
+        &lt;<span class="tag">item</span> id=<span class="val">"nav"</span> href=<span class="val">"nav.xhtml"</span>
+              media-type=<span class="val">"application/xhtml+xml"</span>
+              properties=<span class="val">"nav"</span>/&gt;
+        &lt;<span class="tag">item</span> id=<span class="val">"css"</span> href=<span class="val">"css/style.css"</span>
+              media-type=<span class="val">"text/css"</span>/&gt;
+        &lt;<span class="tag">item</span> id=<span class="val">"cover"</span> href=<span class="val">"text/00-cover.xhtml"</span>
+              media-type=<span class="val">"application/xhtml+xml"</span>/&gt;
+      &lt;/<span class="tag">manifest</span>&gt;
+    
+      &lt;<span class="tag">spine</span>&gt;
+        &lt;<span class="tag">itemref</span> idref=<span class="val">"cover"</span>/&gt;
+      &lt;/<span class="tag">spine</span>&gt;
+    
+    &lt;/<span class="tag">package</span>&gt;
+    </code></pre>
+    
+          <p>
+            Der <code>manifest</code>-Abschnitt beschreibt, welche Dateien
+            zum Buch gehören, der <code>spine</code>-Abschnitt legt die
+            Reihenfolge der Inhalte fest. Gemeinsam definieren sie die
+            Geometrie, in der sich das Lesen bewegt.
+          </p>
+        </section>
+    
+        <section>
+          <h2><code>nav.xhtml</code> &ndash; das Inhaltsverzeichnis</h2>
+          <p>
+            Das Inhaltsverzeichnis ist selbst eine XHTML-Datei. Es beschreibt,
+            welche Kapitel der Palast der Bücher enthält und wie sie benannt
+            sind.
+          </p>
+    
+          <pre><code>&lt;<span class="tag">nav</span> epub:type=<span class="val">"toc"</span> id=<span class="val">"toc"</span>&gt;
+      &lt;<span class="tag">h1</span>&gt;Inhalt&lt;/<span class="tag">h1</span>&gt;
+      &lt;<span class="tag">ol</span>&gt;
+        &lt;<span class="tag">li</span>&gt;&lt;<span class="tag">a</span> href=<span class="val">"text/00-cover.xhtml"</span>&gt;Titelblatt&lt;/<span class="tag">a</span>&gt;&lt;/<span class="tag">li</span>&gt;
+        &lt;<span class="tag">li</span>&gt;&lt;<span class="tag">a</span> href=<span class="val">"text/01-vision.xhtml"</span>&gt;Der Palast der Bücher &ndash; Vision&lt;/<span class="tag">a</span>&gt;&lt;/<span class="tag">li</span>&gt;
+      &lt;/<span class="tag">ol</span>&gt;
+    &lt;/<span class="tag">nav</span>&gt;
+    </code></pre>
+    
+          <p>
+            Während <code>spine</code> die technische Reihenfolge definiert,
+            gibt <code>nav.xhtml</code> dem Menschen Orientierung. Es ist der
+            Wegweiser durch die Räume des Buches.
+          </p>
+        </section>
+    
+        <section>
+          <h2>Typografie und Layout mit <code>style.css</code></h2>
+          <p>
+            Die Datei <code>css/style.css</code> bestimmt das Aussehen des
+            Buches: Schrift, Abstände, Überschriften und auch die Gestaltung
+            von Codeblöcken. Dadurch lässt sich der Charakter des Palastes
+            bis in die Gestaltung einzelner Zeilen hinein prägen.
+          </p>
+    
+          <pre><code><span class="tag">pre</span> &#123;
+      background: <span class="val">#f3e7c8</span>;
+      padding: <span class="val">1rem</span>;
+      border-radius: <span class="val">6px</span>;
+    &#125;
+    
+    <span class="tag">code</span> &#123;
+      font-family: <span class="val">"Courier New", monospace</span>;
+    &#125;
+    </code></pre>
+    
+          <p>
+            Auf diese Weise wird selbst der technische Aufbau des EPUBs zu
+            einem Teil der Ästhetik: Der Palast der Bücher erklärt seine
+            eigene Geometrie in der gleichen Sprache, in der er gebaut ist.
+          </p>
+        </section>
+  </body>
+</html>
