@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package version="3.0"
+         xmlns="http://www.idpf.org/2007/opf"
+         unique-identifier="bookid">
+
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="bookid">urn:uuid:BOOKPALACE-PLACEHOLDER-ID</dc:identifier>
+    <dc:title>Der Palast der Bücher</dc:title>
+    <dc:language>de</dc:language>
+    <meta property="dcterms:modified">2025-11-23T00:00:00Z</meta>
+  </metadata>
+
+  <manifest>
+    <item id="nav" href="nav.xhtml"
+          media-type="application/xhtml+xml"
+          properties="nav"/>
+
+    <item id="css" href="css/style.css"
+          media-type="text/css"/>
+
+    <!-- Kapitel / Inhalte -->
+    <item id="cover" href="text/00-cover.xhtml"
+          media-type="application/xhtml+xml"/>
+    <item id="vision" href="text/01-vision.xhtml"
+          media-type="application/xhtml+xml"/>
+    <item id="geometrie" href="text/02-geometrie-des-lesens.xhtml"
+          media-type="application/xhtml+xml"/>
+          
+      <!-- Bilder -->
+      <item id="logo" href="images/logo.svg" media-type="image/svg+xml"/>
+  </manifest>
+
+  <spine>
+    <itemref idref="cover"/>
+    <itemref idref="vision"/>
+    <itemref idref="geometrie"/>
+  </spine>
+</package>
